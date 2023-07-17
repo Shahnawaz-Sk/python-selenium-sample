@@ -1,4 +1,3 @@
-
 import unittest
 import os
 from selenium import webdriver
@@ -6,6 +5,7 @@ from selenium.webdriver.common.by import By
 
 username = os.getenv("LT_USERNAME")  # Replace the username
 access_key = os.getenv("LT_ACCESS_KEY")  # Replace the access key
+build_name = os.getenv("LT_BUILD_NAME")
 
 
 class FirstSampleTest(unittest.TestCase):
@@ -14,7 +14,7 @@ class FirstSampleTest(unittest.TestCase):
     def setUp(self):
         desired_caps = {
             'LT:Options': {
-                "build": "Python Demo",  # Change your build name here
+                "build": build_name,  # Change your build name here
                 "name": "Python Demo Test",  # Change your test name here
                 "platformName": "Windows 11",
                 "selenium_version": "4.0.0",
