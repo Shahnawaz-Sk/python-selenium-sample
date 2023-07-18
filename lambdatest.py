@@ -3,29 +3,48 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-username = os.getenv("LT_USERNAME")  # Replace the username
-access_key = os.getenv("LT_ACCESS_KEY")  # Replace the access key
-build_name = os.getenv("LT_BUILD_NAME")
+# username = os.getenv("LT_USERNAME")  # Replace the username
+# username = os.getenv("BROWSERSTACK_USERNAME")  
+# # access_key = os.getenv("LT_ACCESS_KEY")  # Replace the access key
+# access_key = os.getenv("BROWSERSTACK_ACCESS_KEY")
+# build_name = os.getenv("LT_BUILD_NAME")
 
 
 class FirstSampleTest(unittest.TestCase):
     # Generate capabilites from here: https://www.lambdatest.com/capabilities-generator/
     # setUp runs before each test case and
     def setUp(self):
-        desired_caps = {
-            'LT:Options': {
-                "build": build_name,  # Change your build name here
-                "name": "Python Demo Test",  # Change your test name here
-                "platformName": "Windows 11",
-                "selenium_version": "4.0.0",
-                "console": 'true',  # Enable or disable console logs
-                "network": 'true',  # Enable or disable network logs
-                #Enable Smart UI Project
-                #"smartUI.project": "<Project Name>"
-            },
-            "browserName": "firefox",
-            "browserVersion": "latest",
+        BROWSERSTACK_USERNAME = os.environ.get("BROWSERSTACK_USERNAME") or "BROWSERSTACK_USERNAME"
+        BROWSERSTACK_ACCESS_KEY = os.environ.get("BROWSERSTACK_ACCESS_KEY") or "BROWSERSTACK_ACCESS_KEY"
+        URL = os.environ.get("URL") or "https://hub.browserstack.com/wd/hub"
+        bstack_options = {
+            "os" : "OS X",
+            "osVersion" : "Monterey",
+            "buildName" : "browserstack-build-1",
+            "sessionName" : "BStack single python",
+            "userName": BROWSERSTACK_USERNAME,
+            "accessKey": BROWSERSTACK_ACCESS_KEY
         }
+        bstack_options["source"] = "python:sample-main:v1.0"
+        options = ChromeOptions()
+        options.set_capability('bstack:options', bstack_options)
+        driver = webdriver.Remote(
+            command_executor=URL,
+            options=options)
+        # desired_caps = {
+        #     'LT:Options': {
+        #         "build": build_name,  # Change your build name here
+        #         "name": "Python Demo Test",  # Change your test name here
+        #         "platformName": "Windows 11",
+        #         "selenium_version": "4.0.0",
+        #         "console": 'true',  # Enable or disable console logs
+        #         "network": 'true',  # Enable or disable network logs
+        #         #Enable Smart UI Project
+        #         #"smartUI.project": "<Project Name>"
+        #     },
+        #     "browserName": "firefox",
+        #     "browserVersion": "latest",
+        # }
 
         # Steps to run Smart UI project (https://beta-smartui.lambdatest.com/)
         # Step - 1 : Change the hub URL to @beta-smartui-hub.lambdatest.com/wd/hub
@@ -33,10 +52,10 @@ class FirstSampleTest(unittest.TestCase):
         # Step - 3 : Run "driver.execute_script("smartui.takeScreenshot")" command wherever you need to take a screenshot 
         # Note: for additional capabilities navigate to https://www.lambdatest.com/support/docs/test-settings-options/
 
-        self.driver = webdriver.Remote(
-            command_executor="http://{}:{}@hub.lambdatest.com/wd/hub".format(
-                username, access_key),
-            desired_capabilities=desired_caps)
+        # self.driver = webdriver.Remote(
+        #     command_executor="http://{}:{}@hub.lambdatest.com/wd/hub".format(
+        #         username, access_key),
+        #     desired_capabilities=desired_caps)
 
 # tearDown runs after each test case
 
