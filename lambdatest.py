@@ -96,6 +96,7 @@
 import unittest
 import os
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.by import By
 
 # username = os.getenv("LT_USERNAME")  # Replace the username
