@@ -116,7 +116,7 @@ class FirstSampleTest(unittest.TestCase):
         bstack_options = {
             "os" : "OS X",
             "osVersion" : "Monterey",
-            "buildName" : "browserstack-build-1",
+            "buildName" : os.environ.get("BROWSERSTACK_BUILD_NAME"),
             "sessionName" : "BStack single python",
             "userName": BROWSERSTACK_USERNAME,
             "accessKey": BROWSERSTACK_ACCESS_KEY
