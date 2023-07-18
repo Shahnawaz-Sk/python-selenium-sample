@@ -112,11 +112,12 @@ class FirstSampleTest(unittest.TestCase):
     def setUp(self):
         BROWSERSTACK_USERNAME = os.environ.get("BROWSERSTACK_USERNAME") or "BROWSERSTACK_USERNAME"
         BROWSERSTACK_ACCESS_KEY = os.environ.get("BROWSERSTACK_ACCESS_KEY") or "BROWSERSTACK_ACCESS_KEY"
+        BROWSERSTACK_BUILD_NAME = os.environ.get("BROWSERSTACK_BUILD_NAME")
         URL = os.environ.get("URL") or "https://hub.browserstack.com/wd/hub"
         bstack_options = {
             "os" : "OS X",
             "osVersion" : "Monterey",
-            "buildName" : os.environ.get("BROWSERSTACK_BUILD_NAME"),
+            "buildName" : BROWSERSTACK_BUILD_NAME,
             "sessionName" : "BStack single python",
             "userName": BROWSERSTACK_USERNAME,
             "accessKey": BROWSERSTACK_ACCESS_KEY
