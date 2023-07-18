@@ -124,7 +124,7 @@ class FirstSampleTest(unittest.TestCase):
         bstack_options["source"] = "python:sample-main:v1.0"
         options = ChromeOptions()
         options.set_capability('bstack:options', bstack_options)
-        driver = webdriver.Remote(
+        self.driver = webdriver.Remote(
             command_executor=URL,
             options=options)
         # desired_caps = {
