@@ -198,10 +198,10 @@ class FirstSampleTest(unittest.TestCase):
         heading = driver.find_element(By.CSS_SELECTOR, ".container h2")
         if heading.is_displayed():
             heading.click()
-            driver.execute_script("lambda-status=passed")
+            # driver.execute_script("lambda-status=passed")
             print("Tests are run successfully!")
         else:
-            driver.execute_script("lambda-status=failed")
+            # driver.execute_script("lambda-status=failed")
 
 
 if __name__ == "__main__":
