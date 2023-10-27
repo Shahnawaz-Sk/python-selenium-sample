@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 username = os.getenv("LT_USERNAME")  # Replace the username
 access_key = os.getenv("LT_ACCESS_KEY")  # Replace the access key
 build_name = os.getenv("BUILDKITE_JOB_ID")
-# tunnel_name = os.getenv("LT_TUNNEL_NAME")
+tunnel_name = os.getenv("LT_TUNNEL_NAME")
 
 
 class FirstSampleTest(unittest.TestCase):
@@ -34,7 +34,7 @@ class FirstSampleTest(unittest.TestCase):
         lt_options = {}
         lt_options["build"] = build_name
         lt_options["tunnel"] = True
-        # lt_options["tunnelName"] = tunnel_name
+        lt_options["tunnelName"] = tunnel_name
         lt_options["name"]= "sample test"
         lt_options["selenium_version"] = "4.0.0"
         lt_options["w3c"] = True
